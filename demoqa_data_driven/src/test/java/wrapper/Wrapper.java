@@ -27,12 +27,21 @@ public interface Wrapper {
 	public void selectValueByName(String name ,String value);
 	
 	public void selectValueByXpath(String xpath ,String value);
+	
 	public String getTextbyCss(String css);
+	
+	public String getTextbyXpath(String xpath);
+	
+	public String getTextbyTagname(String tagname) ;
+	
+	public String getcurrentWindowurl();
+	
+	public String getChildWindowurl();
 	
 	 public void windowscroll();
 	
 	public void sleep(long time);
-	
+	 
 	//public void webdriverwait(duration time,String untilconditions);
 	
 	public void closeBrowser();

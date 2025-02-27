@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testcases.RadioButton">
+      <class name="testcases.Links">
         <methods>
-          <include name="radiobuttonmethod" invocation-numbers="2 5"/>
+          <include name="links" invocation-numbers="0"/>
         </methods>
-      </class> <!-- testcases.RadioButton -->
+      </class> <!-- testcases.Links -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

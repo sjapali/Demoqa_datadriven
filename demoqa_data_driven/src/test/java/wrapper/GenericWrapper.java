@@ -1,8 +1,9 @@
 package wrapper;
 
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -280,9 +281,9 @@ public void invokeAppUrl(String browser,String url) {
 	public String getTextbyCss(String css) {
 		String text = null ;
 		try {
-			WebElement e = driver.findElement(By.cssSelector(css));
+			WebElement ele = driver.findElement(By.cssSelector(css));
                		
-			text = e.getText();
+			text = ele.getText();
 
 			//using getText method the retrieve the text of the element
 
@@ -297,6 +298,33 @@ public void invokeAppUrl(String browser,String url) {
 		return text;
 		
 		
+	}
+	
+	public String getTextbyXpath(String xpath) {
+		
+		String text=null;
+		try {
+			WebElement ele =driver.findElement(By.xpath(xpath));
+			text =ele.getText();
+			System.out.println("you clicked : " +text);
+		}
+		catch(NoSuchElementException e) {
+			System.err.println("getTextbyXpath failed");
+		}
+		return text;
+	}
+	
+	public String getTextbyTagname(String tagname) {
+		String text=null;
+		try {
+			WebElement ele =driver.findElement(By.tagName(tagname));
+			text=ele.getText();
+			System.out.println("your text by tagname is: " +text);
+		}
+		catch(NoSuchElementException e) {
+			System.err.println("getTextbyTagname failed");
+		}
+		return text;
 	}
 	
 	public void explicitwait(long time,String untilconditions) {
@@ -341,6 +369,26 @@ public void invokeAppUrl(String browser,String url) {
        jsx.executeScript("window.scrollBy(0,450)", "");
    }
    
+   public String getcurrentWindowurl() {
+	   
+	 // String currentUrl = driver.getCurrentUrl();
+	  String currentUrl = (String) ((JavascriptExecutor) driver).executeScript("return window.location.href");
+	   System.out.println("currenturl:  " +currentUrl);
+	   return currentUrl;
+	   
+   }
+   
+   public String getChildWindowurl() {
+	   Set<String> windowids = driver.getWindowHandles();
+	   Iterator<String> it= windowids.iterator();
+	   String parentWinID =it.next();
+	   String childWinId =it.next();
+	   String childUrl = driver.switchTo().window(childWinId).getCurrentUrl();
+	   System.out.println("childurl : " +childUrl);
+	   driver.switchTo().window(parentWinID);//switch back to parent window after retrieving child window url
+	   return childUrl;
+	   
+  }
    
 	public void closeBrowser() {
 		
